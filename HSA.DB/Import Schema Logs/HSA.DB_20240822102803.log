@@ -1,0 +1,88 @@
+8/22/2024 3:28:03 AM	This log contains information about the import schema operation into project 'HSA.DB' on computer 'DESKTOP-6SBTTJD' by user 'dev'.
+8/22/2024 3:28:03 AM	Import of database schema has started.
+8/22/2024 3:28:10 AM	Gathering database credentials
+8/22/2024 3:28:10 AM	Gathering database options
+8/22/2024 3:28:10 AM	Gathering generic database scoped configuration option
+8/22/2024 3:28:10 AM	Gathering users
+8/22/2024 3:28:10 AM	Gathering roles
+8/22/2024 3:28:10 AM	Gathering application roles
+8/22/2024 3:28:10 AM	Gathering role memberships
+8/22/2024 3:28:10 AM	Gathering filegroups
+8/22/2024 3:28:10 AM	Gathering full-text catalogs
+8/22/2024 3:28:10 AM	Gathering assemblies
+8/22/2024 3:28:10 AM	Gathering certificates
+8/22/2024 3:28:10 AM	Gathering asymmetric keys
+8/22/2024 3:28:10 AM	Gathering symmetric keys
+8/22/2024 3:28:10 AM	Gathering encrypted symmetric keys
+8/22/2024 3:28:10 AM	Gathering schemas
+8/22/2024 3:28:10 AM	Gathering XML schema collections
+8/22/2024 3:28:10 AM	Gathering user-defined data types
+8/22/2024 3:28:10 AM	Gathering user-defined types
+8/22/2024 3:28:10 AM	Gathering table types
+8/22/2024 3:28:10 AM	Gathering unique keys for table types
+8/22/2024 3:28:10 AM	Gathering primary keys for table types
+8/22/2024 3:28:10 AM	Gathering indexes for table types
+8/22/2024 3:28:10 AM	Gathering check constraints for table types
+8/22/2024 3:28:10 AM	Gathering default constraints for table types
+8/22/2024 3:28:10 AM	Gathering partition functions
+8/22/2024 3:28:10 AM	Gathering partition schemes
+8/22/2024 3:28:10 AM	Gathering functions
+8/22/2024 3:28:10 AM	Gathering encrypted functions
+8/22/2024 3:28:10 AM	Gathering aggregates
+8/22/2024 3:28:10 AM	Gathering procedures
+8/22/2024 3:28:10 AM	Gathering encrypted procedures
+8/22/2024 3:28:10 AM	Gathering tables
+8/22/2024 3:28:10 AM	Gathering primary keys
+8/22/2024 3:28:10 AM	Gathering unique constraints
+8/22/2024 3:28:10 AM	Gathering foreign keys
+8/22/2024 3:28:10 AM	Gathering default constraints
+8/22/2024 3:28:10 AM	Gathering check constraints
+8/22/2024 3:28:10 AM	Gathering views
+8/22/2024 3:28:10 AM	Gathering encrypted views
+8/22/2024 3:28:10 AM	Gathering indexes
+8/22/2024 3:28:10 AM	Gathering statistics
+8/22/2024 3:28:10 AM	Gathering full-text index stoplists
+8/22/2024 3:28:10 AM	Gathering search property lists
+8/22/2024 3:28:10 AM	Gathering search properties
+8/22/2024 3:28:10 AM	Gathering full-text indexes
+8/22/2024 3:28:10 AM	Gathering column store indexes
+8/22/2024 3:28:10 AM	Gathering spatial indexes
+8/22/2024 3:28:10 AM	Gathering XML indexes
+8/22/2024 3:28:10 AM	Gathering Selective XML indexes
+8/22/2024 3:28:10 AM	Gathering encrypted triggers
+8/22/2024 3:28:10 AM	Gathering triggers
+8/22/2024 3:28:10 AM	Gathering encrypted and clr ddl triggers
+8/22/2024 3:28:10 AM	Gathering ddl triggers
+8/22/2024 3:28:10 AM	Creating edge constraints
+8/22/2024 3:28:10 AM	Gathering synonyms
+8/22/2024 3:28:10 AM	Gathering defaults
+8/22/2024 3:28:10 AM	Gathering data constraint uddt bindings
+8/22/2024 3:28:10 AM	Gathering rules
+8/22/2024 3:28:10 AM	Gathering data constraint uddt bindings
+8/22/2024 3:28:10 AM	Gathering message types
+8/22/2024 3:28:10 AM	Gathering queues
+8/22/2024 3:28:10 AM	Gathering contracts
+8/22/2024 3:28:10 AM	Gathering services
+8/22/2024 3:28:10 AM	Gathering event notifications
+8/22/2024 3:28:10 AM	Gathering remote service bindings
+8/22/2024 3:28:10 AM	Gathering broker priorities
+8/22/2024 3:28:10 AM	Gathering signatures
+8/22/2024 3:28:10 AM	Gathering compression options
+8/22/2024 3:28:10 AM	Gathering sequence types
+8/22/2024 3:28:10 AM	Gathering security policies
+8/22/2024 3:28:10 AM	Gather column encryption keys
+8/22/2024 3:28:10 AM	Gathering column master keys
+8/22/2024 3:28:10 AM	Gathering external data sources
+8/22/2024 3:28:10 AM	Gathering external file formats
+8/22/2024 3:28:10 AM	Gathering external tables
+8/22/2024 3:28:10 AM	Gathering XML index compression options
+8/22/2024 3:28:10 AM	Gathering extended properties
+8/22/2024 3:28:10 AM	Gathering assemblies
+8/22/2024 3:28:10 AM	Gathering credentials
+8/22/2024 3:28:10 AM	Gathering logins
+8/22/2024 3:28:10 AM	Gathering server audits
+8/22/2024 3:28:10 AM	Scanning project for duplicate elements
+8/22/2024 3:28:10 AM	Finished duplicate element processing
+8/22/2024 3:28:11 AM	Finished importing database.
+8/22/2024 3:28:11 AM	A summary of the import was saved to the following location: C:\Users\dev\source\repos\HomeServiceApplication-Api\HSA.DB\Import Schema Logs\HSA.DB_20240822102803.log
+8/22/2024 3:28:11 AM	Click Finish to continue...

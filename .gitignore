@@ -1,0 +1,17 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/HomeServiceApplication-Api/bin/Debug/net8.0
+/HomeServiceApplication-Api/obj
+/HSA.Common/bin/Debug/net8.0
+/HSA.Common/obj
+/HSA.DB/bin/Debug
+/HSA.DB/obj/Debug
+*.dbmdl
+*.jfm
+/HSA.DB.Model/bin/Debug/net8.0
+/HSA.DB.Model/obj
+/HSA.Services/bin/Debug/net8.0
+/HSA.Services/obj
