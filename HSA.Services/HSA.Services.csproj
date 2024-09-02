@@ -8,12 +8,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ServiceModels\Shared\" />
-    <Folder Include="Services\Shared\" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+    <ProjectReference Include="..\HSA.Common\HSA.Common.csproj" />
+    <ProjectReference Include="..\HSA.DB.Model\HSA.DB.Model.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="Core.Net.DataMapper">
+			<HintPath>..\Libs\Core.Net.DataMapper.dll</HintPath>
+		</Reference>
+		<Reference Include="Core.Net.Repository">
+			<HintPath>..\Libs\Core.Net.Repository.dll</HintPath>
+		</Reference>
+		<Reference Include="Core.Net.Service">
+			<HintPath>..\Libs\Core.Net.Service.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 
 </Project>

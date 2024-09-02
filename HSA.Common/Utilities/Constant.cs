@@ -1,5 +1,5 @@
 ﻿
-namespace EDS.Common.Utilities
+namespace HSA.Common.Utilities
 {
     public static class Constant
     {

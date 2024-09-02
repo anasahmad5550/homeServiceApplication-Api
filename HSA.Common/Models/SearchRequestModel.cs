@@ -1,4 +1,4 @@
-﻿namespace EDS.Common.Models
+﻿namespace HSA.Common.Models
 {
     public class SearchRequestModel
     {

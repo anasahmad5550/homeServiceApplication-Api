@@ -1,5 +1,5 @@
 ﻿
-using EDS.Common.Utilities;
+using HSA.Common.Utilities;
 
 namespace HMIS.IM.Common.Models
 {

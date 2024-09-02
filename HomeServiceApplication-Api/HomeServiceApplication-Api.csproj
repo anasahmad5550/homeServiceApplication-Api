@@ -8,12 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommonServiceLocator" Version="2.0.7" />
     <PackageReference Include="log4net" Version="2.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.7.1" />
   </ItemGroup>
@@ -23,5 +27,17 @@
     <ProjectReference Include="..\HSA.DB.Model\HSA.DB.Model.csproj" />
     <ProjectReference Include="..\HSA.Services\HSA.Services.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="Core.Net.DataMapper">
+			<HintPath>..\Libs\Core.Net.DataMapper.dll</HintPath>
+		</Reference>
+		<Reference Include="Core.Net.Service">
+			<HintPath>..\Libs\Core.Net.Service.dll</HintPath>
+		</Reference>
+		<Reference Include="TLX.Core.Logger">
+			<HintPath>..\Libs\TLX.Core.Logger.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 
 </Project>

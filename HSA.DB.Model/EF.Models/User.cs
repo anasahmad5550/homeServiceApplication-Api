@@ -31,13 +31,17 @@ public partial class User
     public string? LastName { get; set; }
 
     [Column("role")]
-    public int? Role { get; set; }
+    public UserRole? Role { get; set; }
 
     [Column("created_at")]
     public DateTime? CreatedAt { get; set; }
 
     [Column("updated_at")]
     public DateTime? UpdatedAt { get; set; }
+
+    [Column("salt")]
+    [StringLength(255)]
+    public string Salt { get; set; } = null!;
 
     [InverseProperty("Customer")]
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();

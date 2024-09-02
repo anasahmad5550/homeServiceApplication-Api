@@ -75,6 +75,8 @@ public partial class SerializationContext : DataContext
         {
             entity.HasKey(e => e.Id).HasName("PK__users__3213E83F0A8F184D");
 
+            entity.Property(e => e.Role).HasConversion<int>();
+
             entity.ToTable("users", tb => tb.HasTrigger("trg_users_update"));
 
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");

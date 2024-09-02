@@ -27,8 +27,8 @@ namespace HSA.DB.Model.Data
             {
                 if (currentTenant != null)
                 {
-                    optionsBuilder.UseSqlServer(currentTenant.EdsDbConnectionString);
-                    DBConnectionString = currentTenant.EdsDbConnectionString;
+                    optionsBuilder.UseSqlServer(currentTenant.DbConnectionString);
+                    DBConnectionString = currentTenant.DbConnectionString;
                 }
                 else
                 {
