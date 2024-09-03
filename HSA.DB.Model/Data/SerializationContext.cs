@@ -65,6 +65,8 @@ public partial class SerializationContext : DataContext
 
             entity.ToTable("services", tb => tb.HasTrigger("trg_services_update"));
 
+            entity.Property(e => e.Category).HasConversion<int>();
+
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.UpdatedAt).HasDefaultValueSql("(getdate())");
 

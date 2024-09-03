@@ -1,7 +1,6 @@
 ﻿using HomeServiceApplication_Api.ViewModels.Shared;
 using HSA.DB.Model.EF.Models;
 using HSA.Services.ServiceModels;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
 namespace HomeServiceApplication_Api.ViewModels
@@ -26,6 +25,7 @@ namespace HomeServiceApplication_Api.ViewModels
         [StringLength(50)]
         public string? LastName { get; set; }
 
+        [UserRoleValidation]
         public UserRole? Role { get; set; }
 
     }

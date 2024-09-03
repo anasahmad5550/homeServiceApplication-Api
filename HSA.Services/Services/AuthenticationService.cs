@@ -22,9 +22,10 @@ namespace HSA.Services.Services
             _logger = logger;
         }
 
-        public bool AuthenticateUser(LoginSM loginsm, out string msg)
+        public UserSM? AuthenticateUser(LoginSM loginsm, out string msg, out bool isAuthenticated)
         {
             msg = "Email or Password is incorrect";
+            isAuthenticated = false;
             try
             {
                 var data = uow.RepositoryAsync<User>().Queryable()
@@ -34,23 +35,23 @@ namespace HSA.Services.Services
                     if(passwordHash == data.PasswordHash)
                     {
                         msg = "User Authenticated";
-                        return true;
+                        isAuthenticated = true;
                     }
                     else
                     {
                         msg = "Password is incorrect";
-                        return false;
                     }
+                    return new UserSM().FromDataModel(data);
                 }
                 else
                 {
                     msg = "Email is not correct";
+                    return null;
                 }
-                return false;
             }
             catch (Exception ex) {
                 _logger.LogError($"CustomLog:AuthenticationService: Error Occured while Authenticate User. Exp: {ex}");
-                return false;
+                return null;
             }
         }
 
@@ -67,7 +68,7 @@ namespace HSA.Services.Services
             }
         }
 
-        public string getToken(LoginSM loginsm)
+        public string getToken(LoginSM loginsm, UserSM userSm)
         {
             try
             {
@@ -75,7 +76,8 @@ namespace HSA.Services.Services
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
                 var claims = new[] {
-                //new Claim(JwtRegisteredClaimNames.Sub, loginsm.Username),
+                new Claim(ClaimTypes.NameIdentifier, userSm.Id.ToString()),
+                new Claim(ClaimTypes.Name, $"{userSm.FirstName} {userSm.LastName}" ),
                 new Claim(JwtRegisteredClaimNames.Email, loginsm.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };

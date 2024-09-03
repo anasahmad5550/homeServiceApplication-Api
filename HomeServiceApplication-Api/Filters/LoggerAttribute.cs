@@ -20,7 +20,7 @@ namespace HomeServiceApplication_Api.Filters
 
             string actionName = context.ActionDescriptor.DisplayName;
             var reqUrl = context.HttpContext.Request.Scheme + "://" + context.HttpContext.Request.Host + context.HttpContext.Request.Path.Value;
-            var username = ((context.Controller as ControllerBase)?.User?.Identity as ClaimsIdentity)?.Name ?? "";
+            var username = ((context.Controller as ControllerBase)?.User?.FindFirstValue(ClaimTypes.Name)) ?? "";
 
             logger.LogInformation(string.Format("REQUEST--->LoggedIn Username:{0};URL:{1};Body:{2};", username, reqUrl, JsonConvert.SerializeObject(context.ActionArguments)));
             base.OnActionExecuting(context);

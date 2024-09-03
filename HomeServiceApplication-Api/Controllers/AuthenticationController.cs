@@ -31,8 +31,10 @@ namespace HomeServiceApplication_Api.Controllers
         public ActionResult<ApiResponse<string>> Login(LoginVM vM)
         {
             string msg = "";
-            if (_service.AuthenticateUser(vM.ToServiceModel(vM), out msg)) {
-               string token =  _service.getToken(vM.ToServiceModel(vM));
+            bool isAuthenticated = false;
+            var userSm = _service.AuthenticateUser(vM.ToServiceModel(vM), out msg, out isAuthenticated);
+            if (isAuthenticated) {
+               string token =  _service.getToken(vM.ToServiceModel(vM), userSm);
                 return Ok(token);
             }
             return BadRequest(msg);

@@ -29,7 +29,7 @@ public partial class Service
     public decimal? Price { get; set; }
 
     [Column("category")]
-    public int? Category { get; set; }
+    public Category? Category { get; set; }
 
     [Column("sellerId")]
     public int? SellerId { get; set; }

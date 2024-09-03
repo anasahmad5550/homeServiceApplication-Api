@@ -59,5 +59,26 @@ namespace HSA.Services.Services
             
 
         }
+
+        public UserSM? GetUser(string id) {
+            try
+            {
+                var data = uow.RepositoryAsync<User>().Queryable()
+                    .FirstOrDefault(u => u.Id == int.Parse(id));
+                if (data != null)
+                {
+                    return new UserSM().FromDataModel(data);
+                }
+                else { 
+                    return null;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"CustomLog:UserService: Error Occured while GetUser. Exp: {ex}");
+                return null;
+            }
+        }
     }
 }

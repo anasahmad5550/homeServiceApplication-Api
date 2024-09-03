@@ -1,13 +1,6 @@
 ﻿using Core.Repository.DataContext;
 using HSA.Common.Utilities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HSA.DB.Model.Data
 {
