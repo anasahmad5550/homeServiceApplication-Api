@@ -21,7 +21,7 @@ namespace HomeServiceApplication_Api.ViewModels
 
         public decimal? Price { get; set; }
 
-        public Category? Category { get; set; }
+        public int? Category_id { get; set; }
 
         public int? SellerId { get; set; }
 

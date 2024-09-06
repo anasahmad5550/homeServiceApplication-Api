@@ -30,7 +30,7 @@ public partial class User
     [StringLength(50)]
     public string? LastName { get; set; }
 
-    [Column("role")]
+    [Column("role",TypeName = "int")]
     public UserRole? Role { get; set; }
 
     [Column("created_at")]
@@ -41,7 +41,8 @@ public partial class User
 
     [Column("salt")]
     [StringLength(255)]
-    public string Salt { get; set; } = null!;
+    [Unicode(false)]
+    public string? Salt { get; set; }
 
     [InverseProperty("Customer")]
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();

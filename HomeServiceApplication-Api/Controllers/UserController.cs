@@ -30,7 +30,7 @@ namespace HomeServiceApplication_Api.Controllers
         {
             ApiResponse<int> response = new();
             int code;
-            string message;
+            string message; 
 
             try
             {

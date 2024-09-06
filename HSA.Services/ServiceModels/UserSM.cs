@@ -18,6 +18,7 @@ namespace HSA.Services.ServiceModels
 
         public string? LastName { get; set; }
         public string salt { get; set; } = null!;
+        [Column("Role", TypeName = "int")]
         public UserRole? Role { get; set; }
 
         public DateTime? CreatedAt { get; set; }

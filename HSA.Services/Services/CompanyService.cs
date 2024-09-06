@@ -88,5 +88,23 @@ namespace HSA.Services.Services
 
 
         }
+
+        public int DeleteServices(int categoryId)
+        {
+            try
+            {
+                Delete(service => service.CategoryId == categoryId);
+                uow.SaveChanges();
+                _logger.LogInformation("CustomLog:CompanyService: Services Deleted");
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"CustomLog:CompanyService: Error Occured while creating Service. Exp: {ex}");
+                return -1;
+            }
+
+
+        }
     }
 }

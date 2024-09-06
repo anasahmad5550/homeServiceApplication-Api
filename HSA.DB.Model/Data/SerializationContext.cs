@@ -19,6 +19,8 @@ public partial class SerializationContext : DataContext
 
     public virtual DbSet<Booking> Bookings { get; set; }
 
+    public virtual DbSet<Category> Categories { get; set; }
+
     public virtual DbSet<Review> Reviews { get; set; }
 
     public virtual DbSet<Service> Services { get; set; }
@@ -45,6 +47,16 @@ public partial class SerializationContext : DataContext
                 .HasConstraintName("FK_Bookings_Service");
         });
 
+        modelBuilder.Entity<Category>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__categori__3213E83F24DF7012");
+
+            entity.ToTable("categories", tb => tb.HasTrigger("trg_categories_update"));
+
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.UpdatedAt).HasDefaultValueSql("(getdate())");
+        });
+
         modelBuilder.Entity<Review>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__reviews__3213E83F965F00AF");
@@ -65,10 +77,14 @@ public partial class SerializationContext : DataContext
 
             entity.ToTable("services", tb => tb.HasTrigger("trg_services_update"));
 
-            entity.Property(e => e.Category).HasConversion<int>();
 
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.UpdatedAt).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.Category).WithMany(p => p.Services)
+            .HasConstraintName("FK_services_Categories")
+            .HasForeignKey(s => s.CategoryId)
+            .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasOne(d => d.Seller).WithMany(p => p.Services).HasConstraintName("FK_Services_Seller");
         });

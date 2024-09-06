@@ -79,7 +79,8 @@ namespace HSA.Services.Services
                 new Claim(ClaimTypes.NameIdentifier, userSm.Id.ToString()),
                 new Claim(ClaimTypes.Name, $"{userSm.FirstName} {userSm.LastName}" ),
                 new Claim(JwtRegisteredClaimNames.Email, loginsm.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Role, userSm.Role.ToString())
                 };
 
                 var token = new JwtSecurityToken(_appConfig.jwt.Issuer,
