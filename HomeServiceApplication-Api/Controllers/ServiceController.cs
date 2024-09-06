@@ -59,6 +59,7 @@ namespace HomeServiceApplication_Api.Controllers
 
         #region POST
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult<ApiResponse<int>> Post(ServiceVM vm)
         {
             ApiResponse<int> response = new();

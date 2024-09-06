@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Net;
 using HomeServiceApplication_Api.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HomeServiceApplication_Api.Controllers
 {
@@ -58,6 +59,7 @@ namespace HomeServiceApplication_Api.Controllers
 
         #region POST
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult<ApiResponse<int>> Post(CategoryVM vm)
         {
             ApiResponse<int> response = new();
@@ -85,6 +87,7 @@ namespace HomeServiceApplication_Api.Controllers
 
         #region DELETE
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public ActionResult<ApiResponse<string>> Delete(int id) 
         {
             ApiResponse<int> response = new();
