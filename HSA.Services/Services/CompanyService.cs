@@ -25,7 +25,7 @@ namespace HSA.Services.Services
             _service = new UserService(_appConfig, _logger);
         }
 
-        public List<ServiceSM> GetServices(SearchRequestModel sm, out int totalCount)
+        public List<ServiceSM> GetAllServices(SearchRequestModel sm, out int totalCount)
         {
             try
             {
@@ -50,6 +50,44 @@ namespace HSA.Services.Services
             catch (Exception exp)
             {
                 _logger.LogError($"CustomLog:CompanyService: Error Occured while fetching Companies. Exp: {exp}");
+                throw;
+            }
+        }
+
+        public ServiceSM? GetService(int Id)
+        {
+            try
+            {
+                var service = uow.RepositoryAsync<Service>().Queryable()
+                    .Include(s => s.Category)
+                    .Where(service => service.Id == Id)
+                    .Select(x => new ServiceSM()
+                    {
+                        Id = x.Id,
+                        Title = x.Title,
+                        Description = x.Description,
+                        Location = x.Location,
+                        Price = x.Price,
+                        Category_id = x.CategoryId,
+                        CreatedAt = x.CreatedAt,
+                        UpdatedAt = x.UpdatedAt,
+
+                        Category = x.Category != null ? new CategorySM
+                        {
+                            Title = x.Category.Title,
+                            Id = x.Category.Id
+                        } : new CategorySM(),
+
+                    }).FirstOrDefault();
+
+                if (service != null)
+                    return service;
+                else
+                    return null;
+            }
+            catch (Exception exp)
+            {
+                _logger.LogError($"CustomLog:CompanyService: Error Occured while fetching Services. Exp: {exp}");
                 throw;
             }
         }

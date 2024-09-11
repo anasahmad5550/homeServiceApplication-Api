@@ -33,8 +33,8 @@ namespace HomeServiceApplication_Api.ViewModels
         //public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 
         //[ForeignKey("SellerId")]
-        //[InverseProperty("Services")]
-        //public virtual User? Seller { get; set; }
+        public UserVM? Seller { get; set; }
+        public CategoryVM? Category { get; set; }
 
     }
 

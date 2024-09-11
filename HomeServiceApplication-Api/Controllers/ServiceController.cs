@@ -35,7 +35,7 @@ namespace HomeServiceApplication_Api.Controllers
             {
                 _logger.LogInformation($"Going to fetch Clients");
                 int totalCount;
-                var serviceList = _service.GetServices(vm, out totalCount);
+                var serviceList = _service.GetAllServices(vm, out totalCount);
                 var result = new ServiceVM().FromServiceModelList(serviceList).ToList();
 
                 if (serviceList != null && serviceList.Any())
@@ -55,6 +55,34 @@ namespace HomeServiceApplication_Api.Controllers
                 return BadRequest(response.GetErrorResponseObject((int)HttpStatusCode.InternalServerError, ErrorCodes.SYSTEM_ERROR, exp.Message));
             }
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<ApiResponse<ServiceVM>> Get(int id)
+        {
+            var response = new ApiResponse<ServiceVM>();
+            try
+            {
+                _logger.LogInformation($"Going to fetch Service");
+                var service = _service.GetService(id);
+
+                if (service != null)
+                {
+                    var result = new ServiceVM().FromServiceModel(service);
+                    var resp = response.GetSuccessResponseObject(result, Constant.GET_API_SUCCESS_MSG);
+                    return Ok(resp);
+                }
+                else
+                {
+                    return Ok(response.GetNullResponseObject());
+                }
+
+            }
+            catch (Exception exp)
+            {
+                return BadRequest(response.GetErrorResponseObject((int)HttpStatusCode.InternalServerError, ErrorCodes.SYSTEM_ERROR, exp.Message));
+            }
+        }
+
         #endregion
 
         #region POST

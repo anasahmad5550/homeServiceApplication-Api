@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using HSA.DB.Model.EF.Models;
 using Core.Repository.Infrastructure;
 using System.ComponentModel.DataAnnotations.Schema;
+using Core.DataMapper;
 
 namespace HSA.Services.ServiceModels
 {
@@ -26,12 +27,11 @@ namespace HSA.Services.ServiceModels
 
         public DateTime? UpdatedAt { get; set; }
 
-        [InverseProperty("Service")]
         public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
-
-        [ForeignKey("SellerId")]
-        [InverseProperty("Services")]
-        public virtual User? Seller { get; set; }
+        [Complex]
+        public UserSM? Seller { get; set; }
+        [Complex]
+        public CategorySM? Category { get; set; }
         public ObjectState ObjectState { get; set; }
 
 
