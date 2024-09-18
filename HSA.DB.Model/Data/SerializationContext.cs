@@ -76,15 +76,12 @@ public partial class SerializationContext : DataContext
             entity.HasKey(e => e.Id).HasName("PK__services__3213E83F96B6DF46");
 
             entity.ToTable("services", tb => tb.HasTrigger("trg_services_update"));
-
+            entity.Property(e => e.Status).HasConversion<int>();
 
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.UpdatedAt).HasDefaultValueSql("(getdate())");
 
-            entity.HasOne(d => d.Category).WithMany(p => p.Services)
-            .HasConstraintName("FK_services_Categories")
-            .HasForeignKey(s => s.CategoryId)
-            .OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(d => d.Category).WithMany(p => p.Services).HasConstraintName("FK_services_Categories");
 
             entity.HasOne(d => d.Seller).WithMany(p => p.Services).HasConstraintName("FK_Services_Seller");
         });

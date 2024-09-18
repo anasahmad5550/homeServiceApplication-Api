@@ -18,6 +18,9 @@ namespace HSA.Services.ServiceModels
         public string? Location { get; set; }
 
         public decimal? Price { get; set; }
+        public ServiceStatus status { get; set; }
+
+        public string? RejectionReason { get; set; }
 
         public int? Category_id { get; set; }
 

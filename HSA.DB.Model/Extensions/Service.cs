@@ -8,3 +8,9 @@ public partial class Service : Entity
 {
     
 }
+public enum ServiceStatus
+{
+    InReview,
+    Approved,
+    Rejected
+}

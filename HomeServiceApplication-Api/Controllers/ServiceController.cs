@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using HSA.Common.Models;
 using System.Net;
 using System.Security.Claims;
+using HSA.DB.Model.EF.Models;
 
 namespace HomeServiceApplication_Api.Controllers
 {
@@ -33,8 +34,39 @@ namespace HomeServiceApplication_Api.Controllers
             var response = new ApiGridResponse<ServiceVM>();
             try
             {
-                _logger.LogInformation($"Going to fetch Clients");
+                _logger.LogInformation($"Going to fetch Services");
                 int totalCount;
+                var serviceList = _service.GetAllServices(vm, out totalCount);
+                var result = new ServiceVM().FromServiceModelList(serviceList).ToList();
+
+                if (serviceList != null && serviceList.Any())
+                {
+                    var resp = response.GetSuccessResponseObject(result, Constant.GET_API_SUCCESS_MSG);
+                    resp.totalCount = totalCount;
+                    return Ok(resp);
+                }
+                else
+                {
+                    return Ok(response.GetNullResponseObject());
+                }
+
+            }
+            catch (Exception exp)
+            {
+                return BadRequest(response.GetErrorResponseObject((int)HttpStatusCode.InternalServerError, ErrorCodes.SYSTEM_ERROR, exp.Message));
+            }
+        } 
+
+        [HttpGet("inreview-services")]
+        public ActionResult<ApiGridResponse<ServiceVM>> InreviewServices()
+        {
+            var response = new ApiGridResponse<ServiceVM>();
+            try
+            {
+                _logger.LogInformation($"Going to fetch Services");
+                int totalCount;
+                SearchRequestModel vm = new();
+                vm.searchText = ServiceStatus.InReview.ToString();
                 var serviceList = _service.GetAllServices(vm, out totalCount);
                 var result = new ServiceVM().FromServiceModelList(serviceList).ToList();
 
@@ -63,7 +95,7 @@ namespace HomeServiceApplication_Api.Controllers
             try
             {
                 _logger.LogInformation($"Going to fetch Service");
-                var service = _service.GetService(id);
+                var service = _service.GetService(id, out string msg);
 
                 if (service != null)
                 {
@@ -73,7 +105,7 @@ namespace HomeServiceApplication_Api.Controllers
                 }
                 else
                 {
-                    return Ok(response.GetNullResponseObject());
+                    return NotFound(response.GetResponseObject(null,false,msg, (int)HttpStatusCode.NotFound));
                 }
 
             }
@@ -87,7 +119,7 @@ namespace HomeServiceApplication_Api.Controllers
 
         #region POST
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Seller,Customer")]
         public ActionResult<ApiResponse<int>> Post(ServiceVM vm)
         {
             ApiResponse<int> response = new();
@@ -113,6 +145,57 @@ namespace HomeServiceApplication_Api.Controllers
                 return BadRequest(response.GetErrorResponseObject((int)HttpStatusCode.InternalServerError, ErrorCodes.SYSTEM_ERROR, exp.Message));
             }
         }
+        #endregion
+
+        #region PATCH
+        [HttpPatch("approve/{id}")]
+        [Authorize(Roles = "Admin")]
+        public ActionResult<ApiResponse<string>> Approve(int id) { 
+            ApiResponse<string> response = new();
+            string msg = "";
+            try
+            {
+                int status = _service.ApproveService(id, out msg);
+                if (status > 0) { 
+                    return Ok(response.GetSuccessResponseObject("Approved", msg));
+                }
+                else
+                {
+                    return NotFound(response.GetErrorResponseObject((int)HttpStatusCode.NotFound, Constant.DATA_NOT_FOUND, msg));
+                }
+            }
+            catch (Exception exp)
+            {
+                return BadRequest(response.GetErrorResponseObject((int)HttpStatusCode.InternalServerError, ErrorCodes.SYSTEM_ERROR, exp.Message));
+            }
+            
+        }
+
+        [HttpPatch("reject/{id}")]
+        [Authorize(Roles = "Admin")]
+        public ActionResult<ApiResponse<string>> Reject(int id, RejectServiceVM vm)
+        {
+            ApiResponse<string> response = new();
+            string msg = "";
+            try
+            {
+                int status = _service.RejectService(id, vm.ToServiceModel(vm), out msg);
+                if (status > 0)
+                {
+                    return Ok(response.GetSuccessResponseObject("Rejected", msg));
+                }
+                else
+                {
+                    return NotFound(response.GetErrorResponseObject((int)HttpStatusCode.NotFound, Constant.DATA_NOT_FOUND, msg));
+                }
+            }
+            catch (Exception exp)
+            {
+                return BadRequest(response.GetErrorResponseObject((int)HttpStatusCode.InternalServerError, ErrorCodes.SYSTEM_ERROR, exp.Message));
+            }
+
+        }
+
         #endregion
     }
 }

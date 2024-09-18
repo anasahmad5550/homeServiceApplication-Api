@@ -40,12 +40,17 @@ public partial class Service
     [Column("updated_at")]
     public DateTime? UpdatedAt { get; set; }
 
-    [Column("status")]
-    public int Status { get; set; }
+    [Column("status", TypeName = "int")]
+    public ServiceStatus Status { get; set; }
 
     [Column("comments")]
     [StringLength(255)]
     public string? Comments { get; set; }
+
+    [Column("rejection_reason")]
+    [StringLength(250)]
+    [Unicode(false)]
+    public string? RejectionReason { get; set; }
 
     [InverseProperty("Service")]
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();

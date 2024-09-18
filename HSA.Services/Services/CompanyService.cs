@@ -34,7 +34,7 @@ namespace HSA.Services.Services
 
                 if (sm != null && !string.IsNullOrEmpty(sm.searchText))
                 {
-                    query = query.Where(x => x.Title.Contains(sm.searchText, StringComparison.OrdinalIgnoreCase));
+                    query = query.Where(x => x.Status == (ServiceStatus)Enum.Parse(typeof(ServiceStatus), sm.searchText, true));
                 }
                 if (sm.pageNumber > 0 && sm.pageSize > 0)
                 {
@@ -54,7 +54,7 @@ namespace HSA.Services.Services
             }
         }
 
-        public ServiceSM? GetService(int Id)
+        public ServiceSM? GetService(int Id, out string msg)
         {
             try
             {
@@ -81,9 +81,14 @@ namespace HSA.Services.Services
                     }).FirstOrDefault();
 
                 if (service != null)
+                {
+                    msg = "Service found successfully";
                     return service;
+                }
                 else
-                    return null;
+                    msg = "Service not found";
+
+                return null;
             }
             catch (Exception exp)
             {
@@ -139,6 +144,67 @@ namespace HSA.Services.Services
             catch (Exception ex)
             {
                 _logger.LogError($"CustomLog:CompanyService: Error Occured while creating Service. Exp: {ex}");
+                return -1;
+            }
+
+
+        }
+
+        public int ApproveService(int id, out string msg)
+        {
+            try
+            {
+                ServiceSM? sm =  GetService(id, out msg);
+                if (sm != null) {
+                    sm.status = ServiceStatus.Approved;
+                    Update(sm);
+                    uow.SaveChanges() ;
+                    msg = "Service approved";
+                    _logger.LogInformation("CustomLog:CompanyService: Services updated");
+                    return 1;
+                }
+                else
+                {
+                    _logger.LogInformation("CustomLog:CompanyService: Services not found");
+                    msg = "Service not found";
+                    return -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"CustomLog:CompanyService: Error Occured while updating Service. Exp: {ex}");
+                msg = ex.Message;
+                return -1;
+            }
+
+
+        }
+        public int RejectService(int id, ServiceSM service, out string msg)
+        {
+            try
+            {
+                ServiceSM? sm = GetService(id, out msg);
+                if (sm != null && sm.status == ServiceStatus.InReview)
+                {
+                    sm.RejectionReason = service.RejectionReason;
+                    sm.status = ServiceStatus.Rejected;
+                    Update(sm);
+                    uow.SaveChanges();
+                    msg = "Service rejected";
+                    _logger.LogInformation("CustomLog:CompanyService: Services rejected");
+                    return 1;
+                }
+                else
+                {
+                    _logger.LogInformation("CustomLog:CompanyService: Services not found");
+                    msg = "Service not found";
+                    return -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"CustomLog:CompanyService: Error Occured while updating Service. Exp: {ex}");
+                msg = ex.Message;
                 return -1;
             }
 

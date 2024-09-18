@@ -24,9 +24,10 @@ namespace HomeServiceApplication_Api.ViewModels
         public int? Category_id { get; set; }
 
         public int? SellerId { get; set; }
+        public ServiceStatus status { get; set; }
 
         public DateTime? CreatedAt { get; set; }
-
+        public string? RejectionReason { get; set; }
         public DateTime? UpdatedAt { get; set; }
 
         //[InverseProperty("Service")]
